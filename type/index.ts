@@ -7,6 +7,7 @@ export type Image = {
       dimensions?: {
         aspectRatio?: number
         width?: number
+        height?: number
       }
     }
   }
@@ -17,7 +18,11 @@ export type Post = {
   slug?: {
     current?: string
   }
-  body?: {}
+  body?: [{
+    children?: [{
+      text?: string
+    }]
+  }]
   author?: {
     name?: string
     image?: Image

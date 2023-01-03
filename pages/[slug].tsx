@@ -14,9 +14,8 @@ import {
 } from 'next'
 
 import Image from 'next/image'
-import { imageSource } from 'lib/sanity.image.ts'
+import { imageSource } from 'lib/sanity.image'
 import { ParsedUrlQuery } from 'querystring'
-import { PortableText } from '@portabletext/react'
 
 interface IParams extends ParsedUrlQuery {
   slug: string
@@ -48,22 +47,23 @@ export const getStaticProps: GetStaticProps<{
 export default function Post({
   post
 }: InferGetStaticPropsType<typeof getStaticProps>){
-
   const image = imageSource(post?.author?.image)
 
   return (
     <div>
       <p>{post?.title}</p>
-      <PortableText value={post?.body}/>
+      <p>{post?.body?.[0]?.children?.[0]?.text}</p>
       <p>Author: {post?.author?.name}</p>
-      <Image
-        src={image?.url}
-        width={image?.width}
-        height={image?.height}
-        placeholder='blur'
-        blurDataURL={image?.blur}
-        alt='alt'
-      />
+      {image?.url && image?.blur &&
+        <Image
+          src={image?.url}
+          width={image?.width}
+          height={image?.height}
+          placeholder='blur'
+          blurDataURL={image?.blur}
+          alt='alt'
+        />
+      }
     </div>
   )
 }
