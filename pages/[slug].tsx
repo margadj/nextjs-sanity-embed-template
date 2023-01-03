@@ -14,6 +14,7 @@ import {
 } from 'next'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { imageSource } from 'lib/sanity.image'
 import { ParsedUrlQuery } from 'querystring'
 
@@ -51,6 +52,7 @@ export default function Post({
 
   return (
     <div>
+      <Link href='/'>Back</Link>
       <p>{post?.title}</p>
       <p>{post?.body?.[0]?.children?.[0]?.text}</p>
       <p>Author: {post?.author?.name}</p>
